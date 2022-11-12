@@ -1,5 +1,5 @@
 import pygame as pg
-from random import randint
+from random import randint, choice
 
 pg.font.init()
 pg.mixer.init()
@@ -112,6 +112,7 @@ shoot2_sound = pg.mixer.Sound('laser3.wav')
 shoot3_sound = pg.mixer.Sound('laser4.wav')
 shoot4_sound = pg.mixer.Sound('laser5.wav')
 shoot5_sound = pg.mixer.Sound('laser11.wav')
+shooting_sounds = [shoot1_sound, shoot2_sound, shoot3_sound, shoot4_sound, shoot5_sound]
 
 state='menu'
 intro = TextSprite(text='Buggy Intruder', font_size=100, position=(WIDTH/6.3, 100), color='Aquamarine')
@@ -160,17 +161,7 @@ while True:
     for e in pg.event.get():
         if e.type == pg.KEYDOWN and (e.key == pg.K_SPACE or e.key == pg.K_k) and state == 'start':
             p.shoot()
-            n = randint(1,5)
-            if n == 1:
-                shoot1_sound.play()
-            if n == 2:
-                shoot2_sound.play()
-            if n == 3:
-                shoot3_sound.play()
-            if n == 4:
-                shoot4_sound.play()
-            if n == 5:
-                shoot5_sound.play()
+            choice(shooting_sounds).play()
         if e.type == pg.KEYDOWN and e.key == pg.K_RETURN and (state == 'menu' or state == 'gg'):
             state = 'start'
             points = 0
